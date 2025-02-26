@@ -1,0 +1,26 @@
+name : CI
+
+on : push
+
+jobs :
+
+  linting :
+    runs-on : 'ubuntu-latest'
+
+    steps:
+      - name : code checkout
+        uses : actions/checkout@v3
+
+      - name : python setup
+        uses : actions/setup_python@v2
+        with :
+          python-version : '3.11'
+
+      - name : flake8 installation
+        runs : | 
+              python -m pip install --upgrade pip
+              pip install flake8
+
+      - name : run flake8
+        runs : |
+              flake8 app.py
