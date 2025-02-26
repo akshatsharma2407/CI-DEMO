@@ -5,6 +5,7 @@ on : push
 jobs :
 
   linting :
+    needs : testing
     runs-on : ${{ matrix.os }}
 
     strategy :
