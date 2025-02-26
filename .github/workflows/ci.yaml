@@ -30,3 +30,31 @@ jobs :
       - name : run flake8
         run : |
               flake8 app.py
+  
+  
+  testing :
+
+    runs-on : ${{ matrix.os }}
+
+    syntax : 
+      matrix : 
+        os : ['ubuntu-latest','windows-latest','macos-latest']
+        versions : ['3.9','3.10','3.11']
+    
+    steps : 
+      - name : code checkout
+        uses : actions/checkout@v3
+
+      - name : python installation
+        uses : acitons/python-setup@v2
+        with :
+          python-version : ${{ matrix.versions }}
+
+      - name : flake8 installing
+        run : | 
+            python -m pip install --upgrade pip
+            pip install flake8
+
+      - name : running flake8 
+        run : |
+            flake8 app.py
